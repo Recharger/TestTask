@@ -44,6 +44,44 @@ class AuthService {
     };
     request.send(`username=${username}&password=${password}`);
   };
+  
+  
+  register = (username, password, firstName, lastName) => {
+    const request = new XMLHttpRequest();
+    request.open('POST', 'http://localhost:8000/auth/register', true);
+    request.timeout = 5000; // 5s timeout
+    request.withCredentials = true;
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    request.ontimeout = () => {
+      dispatch(setAuthenticationError('Timeout connecting to the backend'));
+    };
+
+    request.onreadystatechange = () => {
+      if (request.readyState === 4) {
+        if (request.status === 200) {
+          this.connect();
+        } else {
+          switch (request.status) {
+            case -1:
+            case 0:
+            case 404:
+            case 500:
+              dispatch(setAuthenticationError('Service not available'));
+              break;
+
+            case 403:
+              dispatch(setAuthenticationError(request.responseText));
+              break;
+
+            default:
+              dispatch(setAuthenticationError(`${request.status}: ${request.statusText}`));
+          }
+        }
+      }
+    };
+    request.send(`username=${username}&password=${password}&firstName=${firstName}&lastName=${lastName}`);
+  };
 
   connect = () => new Promise((resolve) => {
     this.socket = io.connect('http://localhost:8000', {

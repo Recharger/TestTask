@@ -4,6 +4,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from src.authentication_handlers import auth
+from src.data_handlers import data 
 from src.database import db
 from src.request_handler import RequestHandler
 from src.scheduler_manager import SchedulerManager
@@ -23,7 +24,7 @@ def create_app():
                         level=app.config['LOG_LEVEL'])
 
     # init sqlalchemy db connection
-    # db.init_app(app)
+    db.init_app(app)
 
     # create and init socket server with request handler
     request_handler = RequestHandler()
@@ -35,6 +36,7 @@ def create_app():
         SchedulerManager(app, sio)
 
     app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(data, url_prefix='/data')
 
     return sio, app
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import RegisterForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 import AuthService from '../services/AuthService';
 
-class LoginFormContainer extends React.Component {
+class RegisterFormContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.authenticationCheck(nextProps);
   }
@@ -20,8 +20,8 @@ class LoginFormContainer extends React.Component {
   render() {
     const { state } = this.props;
     return (
-      <LoginForm
-        login={AuthService.register}
+      <RegisterForm
+        register={AuthService.register}
         error={state.authenticationError}
       />
     );

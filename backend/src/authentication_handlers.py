@@ -1,7 +1,7 @@
 import logging
 
 from flask import session, request, abort, Blueprint
-
+from src.database import db
 import src.models as models
 
 auth = Blueprint("auth", __name__)
@@ -9,7 +9,9 @@ auth = Blueprint("auth", __name__)
 
 @auth.before_request
 def before_request():
-    if "username" not in session and request.endpoint != "auth.login":
+    print('\n\n{}\n\n'.format(request.endpoint))
+    print("username" not in session)
+    if "username" not in session and not (request.endpoint == "auth.login" or request.endpoint == "auth.register"):
         logging.info("Access denied")
         abort(401)
 
@@ -20,10 +22,28 @@ def echo(message):
     return message
 
 
+@auth.route("/register", methods=["POST"])
+def register():
+    username = request.form["username"]
+    user = models.User.query.filter(models.User.username == username).first()
+    if user is not None: 
+        logging.info("Trying to register existed user = {}".format(username))
+        return "Already exists", 409, {"Access-Control-Allow-Credentials": "true"}
+    else:
+        user = models.User(
+                username=username,
+                password=request.form["password"],
+                first_name=request.form["firstName"],
+                last_name=request.form["lastName"])
+        db.session.add(user) 
+        db.session.commit() 
+        logging.info("New user registered = {}".format(username))
+        return "Created", 201, {"Access-Control-Allow-Credentials": "true"}
+
+
 @auth.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
-    user = models.User(username='dev_user', password='development')
     user = models.User.query.filter(models.User.username == username).first()
     if user is not None and user.check_password(request.form["password"]):
         session["username"] = username
