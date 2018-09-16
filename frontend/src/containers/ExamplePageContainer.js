@@ -10,12 +10,10 @@ class ExampleComponentContainer extends React.Component {
   };
 
   render() {
-    const { fullName, broadcastMessage } = this.props.exampleStore;
+    const { interestData } = this.props.exampleStore;
     return (
       <ExampleComponent
-        fullName={fullName}
-        getFullName={this.getFullName}
-        broadcastMessage={broadcastMessage}
+        data={interestData}
       />
     );
   }

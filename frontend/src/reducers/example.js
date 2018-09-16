@@ -1,8 +1,7 @@
 import * as types from '../constants/actions';
 
 const initialState = {
-  broadcastMessage: '',
-  fullName: '',
+  interestData: [],
 };
 
 const handleResponse = (response) => {

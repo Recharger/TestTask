@@ -4,17 +4,20 @@ import { Provider } from 'react-redux';
 import AppPage from './pages/AppPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import MenuAppBar from './components/AppBarComponent';
 import ReduxService from './services/ReduxService';
 
 const App = () => (
   <Provider store={ReduxService.store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/" component={AppPage} />
-      </Switch>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/" component={AppPage} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   </Provider>
 );
 

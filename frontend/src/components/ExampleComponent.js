@@ -1,12 +1,8 @@
 import React from 'react';
+import LineChart from "react-chartjs";
 
 const ExampleComponent = (props) => (
-  <div>
-    <div>
-      <button onClick={props.getFullName}>{'Get full name'}</button>
-      {`My full name: ${props.fullName}`}</div>
-    <div>{`Broadcast message: ${props.broadcastMessage}`}</div>
-  </div>
+  <LineChart data={props.chartData} options={props.chartOptions} width="600" height="250"/>
 );
 
 export default ExampleComponent;

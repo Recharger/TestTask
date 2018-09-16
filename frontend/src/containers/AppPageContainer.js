@@ -4,7 +4,10 @@ import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import ExamplePage from '../pages/ExamplePage';
 
+
+
 class AppPageContainer extends React.Component {
+  
   componentWillMount() {
     this.authenticationCheck(this.props);
   }
@@ -23,7 +26,7 @@ class AppPageContainer extends React.Component {
     return (
       <Switch>
         <Route exact path={'/'} component={ExamplePage} />
-        <Route render={() => <div>{'404 Not Found'}</div>} />
+        <Route render={() => <div>{'404 Not Found'}</div>} /> 
       </Switch>
     );
   }

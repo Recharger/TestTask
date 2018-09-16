@@ -1,9 +1,10 @@
 import React from 'react';
 import LoginPageContainer from '../containers/LoginFormContainer';
+import MenuAppBar from '../components/AppBarComponent';
 
 const LoginPage = () => (
   <div>
-    <div>{'Login Page'}</div>
+    <MenuAppBar /> 
     <LoginPageContainer />
   </div>
 );

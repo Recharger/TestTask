@@ -1,9 +1,10 @@
 import React from 'react';
 import RegisterPageContainer from '../containers/RegisterFormContainer';
+import MenuAppBar from '../components/AppBarComponent';
 
 const RegisterPage = () => (
   <div>
-    <div>{'Register Page'}</div>
+    <MenuAppBar /> 
     <RegisterPageContainer />
   </div>
 );
