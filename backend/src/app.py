@@ -4,7 +4,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from src.authentication_handlers import auth
-from src.data_handlers import data 
+from src.data_handler import data 
 from src.database import db
 from src.request_handler import RequestHandler
 from src.scheduler_manager import SchedulerManager

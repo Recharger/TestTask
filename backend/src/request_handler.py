@@ -3,6 +3,10 @@ import logging
 import eventlet
 
 import src.models as models
+from pytrends.request import TrendReq
+
+pytrends = TrendReq(hl='en-US', tz=360)
+
 
 
 class ErrorWithStatusMessage(Exception):
@@ -23,6 +27,16 @@ class RequestHandler:
             response = {**request, "status": "fail", "message": "Invalid/Unknown Request"}
 
         return response
+    
+    
+    def get_trends_data(self, data, username):
+        try:
+            print(data)
+            pytrends.build_payload(data['keywords'], cat=0, timeframe=data['timePeriod'], geo='', gprop='')
+            result = pytrends.interest_over_time()
+            return {"response": result.to_json(), "username": username }
+        except:
+            return None
 
     def handle_async_request(self, request_method, request, username):
         response = {"id": request["id"], "type": request["type"]}
@@ -49,4 +63,5 @@ class RequestHandler:
     # all allowed requests
     requests = {
         "get_user_full_name": get_user_full_name,
+        "get_trends_data": get_trends_data,
     }
