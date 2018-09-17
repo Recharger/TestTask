@@ -13,7 +13,6 @@ class APIService {
       dispatch(receiveResponse(data));
     });
     this.socket.on('broadcast_example', (data) => {
-      console.log(data);
       dispatch(broadcastMessageUpdate(data));
     });
   };
