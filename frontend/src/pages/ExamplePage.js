@@ -4,7 +4,6 @@ import MenuAppBar from '../components/AppBarComponent';
 
 const ExamplePage = () => (
   <div>
-    <MenuAppBar /> 
     <ExamplePageContainer />
   </div>
 );

@@ -10,6 +10,12 @@ export const receiveResponse = response => ({
   response,
 });
 
+export const setRequestError = error => ({
+  type: types.REQUEST_ERROR,
+  error,
+});
+
+
 export const broadcastMessageUpdate = message => ({
   type: types.BROADCAST_MESSAGE_UPDATE,
   message,

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import AppPage from './pages/AppPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import MenuAppBar from './components/AppBarComponent';
 import ReduxService from './services/ReduxService';
 
 const App = () => (

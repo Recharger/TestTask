@@ -6,8 +6,10 @@ const initialState = {
 
 const handleResponse = (response) => {
   switch (response.type) {
-    case 'get_user_full_name': {
-      return { fullName: response.data };
+    case 'get_trends_data': {
+
+      console.log("RECEIVED", response.data)
+      return { interestData: response.data };
     }
     default:
       return {};
